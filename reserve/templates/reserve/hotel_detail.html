@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+{% block content %}
+  <h2> hotel detail </h2>
+
+  <ul>
+    <li>{{object.name}}</li>
+    <li>{{object.location}}</li>
+    <li>{{object.phone_no}}</li>
+    <li>{{object.rooms_no}}</li>
+    <li>{{object.grade}}</li>
+    <li>{{object.description}}</li>
+  </ul>
+<img class="img-fluid" alt="Responsive image" src="hotel.room_hotel.image_room.url">
+{% endblock %}

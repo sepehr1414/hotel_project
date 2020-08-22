@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% block content %}
+  <h2> reserve detail </h2>
+
+  <ul>
+    <li>{{object.hotel_reserve}}</li>
+    <li>{{object.customer}}</li>
+    <li>{{object.no_of_adult}}</li>
+    <li>{{object.no_of_children}}</li>
+    <li>{{object.reservation_date_time}}</li>
+    <li>{{object.check_in_date_time}}</li>
+    <li>{{object.check_out_date_time}}</li>
+    <li>{{object.room_reserve}}</li>
+
+  </ul>
+
+{% endblock %}

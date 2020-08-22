@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block content %}
+  <h2>hotel list in hotel</h2>
+
+  <ul>
+    {% for hotel in hotel_list %}
+      <h2><a href="{% url 'hotel:hotel-detail' hotel.hotel_id %}"> {{hotel.name}} </a></h2>
+      <img class="img-fluid" alt="Responsive image" src="{{hotel.image.url}}">
+    {% endfor %}
+  </ul>
+
+{% endblock %}
