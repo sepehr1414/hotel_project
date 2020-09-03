@@ -3,7 +3,7 @@ from reserve.models import Hotel,Location,Reservation
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import ReserveForm
-
+from django import forms
 # Create your views here.
 
 
@@ -27,9 +27,9 @@ class ReserveFormCreate(CreateView):
     queryset = Reservation.objects.all()
     template_name = 'reserve/reservation_form.html'
 
-    fields = ['no_of_children', 'no_of_adult',
-    'reservation_date_time','check_in_date_time',
+    fields = ['no_of_children', 'no_of_adult','check_in_date_time',
     'check_out_date_time', 'customer', 'hotel_reserve', 'room_reserve']
+
 
     def form_valid(self, form):
         return super().form_valid(form)
@@ -41,3 +41,27 @@ class ReserveDetail(DetailView):
     fields = ['no_of_children', 'no_of_adult',
     'reservation_date_time','check_in_date_time',
     'check_out_date_time', 'customer', 'hotel_reserve', 'room_reserve']
+
+
+def is_valid_query(param):
+    return param != '' and param is not None
+
+
+def filter_form(request):
+    hotel_qs = Hotel.objects.all()
+    country_name_query = request.GET.get('country_name')
+    city_name_query = request.GET.get('city_name')
+    hotel_name_query = request.GET.get('hotel_name')
+    grade_query = request.GET.get('grade-room')
+
+    if is_valid_query(country_name_query):
+        hotel_qs = hotel_qs.filter(location__country__icontains=country_name_query)
+    if is_valid_query(city_name_query):
+        hotel_qs = hotel_qs.filter(location__city__icontains=city_name_query)
+    if is_valid_query(hotel_name_query):
+        hotel_qs = hotel_qs.filter(name__icontains=hotel_name_query)
+
+    context = {
+        'queryset':hotel_qs
+    }
+    return render(request, 'search.html', context)

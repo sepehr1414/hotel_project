@@ -67,8 +67,8 @@ class Room(models.Model):
     number_of_bed = models.SmallIntegerField(default=1)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="room_hotel", null=True)
     image_room = models.ImageField(null = True, blank = True, upload_to ='room_pics')
+    reserved = models.BooleanField(default=False)
 
-    
     def __str__(self):
         return f"hotel: {self.hotel.name}  grade: {self.grade} price:{self.price} number of bed: {self.number_of_bed}"
 

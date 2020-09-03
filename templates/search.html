@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+{% block content %}
+  <div class="container-fluid">
+    <form action='.' method="get">
+      <div class="form-group">
+        <label for="country">country:</label>
+        <input class="form-control" type="text" name="country_name">
+      </div>
+      <div class="form-group">
+        <label for="city">city:</label>
+        <input class="form-control" type="text" name="city_name">
+      </div>
+      <div class="form-group">
+        <label for="hotel_name">hotel name:</label>
+        <input class="form-control" type="text" name="hotel_name">
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" name="grade_room" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Grade hotel
+        </button>
+        <div class="dropdown-menu" aria-labelledby="room-grade">
+          <a class="dropdown-item">vip</a>
+          <a class="dropdown-item">non vip</a>
+        </div>
+      </div>
+      <br>
+      <div >
+        <input type="submit" name="submit" value="search">
+      </div>
+      </div>
+    </form>
+    <br>
+    <hr>
+    <div class="row">
+      <ul>
+        {% for hotel in queryset %}
+          <br>
+          <li>
+            {{hotel.name}}
+            <ul>
+              <img class="img-fluid" alt="Responsive image" src="{{hotel.image.url}}">
+              <li>hotel country : {{hotel.location.country}}</li>
+              <li>hotel city : {{hotel.location.city}}</li>
+              <li>number of room : {{hotel.rooms_no}}</li>
+              <li>grade : {{hotel.grade}}</li>
+            </ul>
+          </li>
+        {% endfor %}
+      </ul>
+  </div>
+
+{% endblock %}
